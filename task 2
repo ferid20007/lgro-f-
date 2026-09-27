@@ -1,0 +1,59 @@
+namespace _5094a2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int result = 0;
+
+           
+            if (!int.TryParse(number1MaskedTextBox.Text, out int number1) || 
+                !int.TryParse(number2MaskedTextBox.Text, out int number2))
+            {
+                MessageBox.Show("Please enter valid numbers!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedOperator = operatorComboBox1.Text;
+
+            switch (selectedOperator)
+            {
+                case "-":
+                    result = number1 - number2;
+                    break;
+                case "+":
+                    result = number1 + number2;
+                    break;
+                case "/":
+                    if (number2 == 0)
+                    {
+                        MessageBox.Show("Division by zero is not allowed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    result = number1 / number2;
+                    break;
+                case "*":
+                    result = number1 * number2;
+                    break;
+                default:
+                    MessageBox.Show("Please select an operator!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+            }
+
+            label4.Text = "Result: " + result.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            number1MaskedTextBox.Clear();
+            number2MaskedTextBox.Clear();
+            operatorComboBox1.SelectedIndex = -1;
+            label4.Text = "Result: 0";
+        }
+    }
+}
